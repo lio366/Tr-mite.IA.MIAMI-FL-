@@ -4,6 +4,17 @@ const request = require('supertest');
 const app = require('../src/app');
 
 const disclaimerLead = 'DESCARGO LEGAL / DISCLAIMER OBLIGATORIO';
+const disclaimerLeadHex = '444553434152474f204c4547414c202f20444953434c41494d4552204f424c494741';
+const binaryParser = (res, callback) => {
+  res.setEncoding('binary');
+  let data = '';
+  res.on('data', (chunk) => {
+    data += chunk;
+  });
+  res.on('end', () => {
+    callback(null, Buffer.from(data, 'binary'));
+  });
+};
 
 test('GET / renders onboarding with mandatory disclaimer', async () => {
   const response = await request(app).get('/');
@@ -29,12 +40,15 @@ test('GET /dashboard lists autonomous modules', async () => {
 test('POST /documents/dispatch.pdf generates a PDF with the legal footer', async () => {
   const response = await request(app)
     .post('/documents/dispatch.pdf')
+    .buffer(true)
+    .parse(binaryParser)
     .type('form')
     .send({ moduleId: 'credit-repair', clientName: 'Ana Pérez' });
 
   assert.equal(response.status, 200);
   assert.equal(response.headers['content-type'], 'application/pdf');
-  assert.match(response.text, /Ana Pérez/);
-  assert.match(response.text, /Credit Repair Agent/);
-  assert.match(response.text, new RegExp(disclaimerLead));
+  assert.match(response.headers['content-disposition'], /credit-repair-dispatch\.pdf/);
+  const pdfText = response.body.toString('latin1');
+  assert.match(pdfText, /%PDF-1\.3/);
+  assert.match(pdfText, new RegExp(disclaimerLeadHex));
 });

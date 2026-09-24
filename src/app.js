@@ -12,13 +12,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 function addPdfFooter(doc) {
-  const bottom = doc.page.height - 72;
+  const width = doc.page.width - 100;
+  const options = {
+    width,
+    align: 'center'
+  };
+  const height = doc.heightOfString(legalDisclaimer, options);
+  const top = doc.page.height - doc.page.margins.bottom - height;
+
+  doc.save();
   doc.fontSize(8)
     .fillColor('#4b5563')
-    .text(legalDisclaimer, 50, bottom, {
-      width: doc.page.width - 100,
-      align: 'center'
-    });
+    .text(legalDisclaimer, 50, top, options);
+  doc.restore();
 }
 
 app.get('/', (_req, res) => {
@@ -55,8 +61,12 @@ app.post('/documents/dispatch.pdf', (req, res) => {
     `attachment; filename="${summary.module.id}-dispatch.pdf"`
   );
 
-  const doc = new PDFDocument({ margin: 50, size: 'LETTER', compress: false });
-  doc.on('pageAdded', () => addPdfFooter(doc));
+  const doc = new PDFDocument({
+    margin: 50,
+    size: 'LETTER',
+    compress: false,
+    margins: { top: 50, right: 50, bottom: 110, left: 50 }
+  });
   doc.pipe(res);
 
   doc.fontSize(20).fillColor('#111827').text('Expediente Autogenerado', { align: 'center' });
