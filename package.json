@@ -1,0 +1,25 @@
+{
+  "name": "tr-mite.ia.miami-fl-",
+  "version": "1.0.0",
+  "description": "Trámite.IA.MIAMI.FL autonomous modules with mandatory compliance disclaimer",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/lio366/Tr-mite.IA.MIAMI-FL-"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "pdfkit": "^0.20.2"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.0"
+  }
+}
