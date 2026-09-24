@@ -1,0 +1,24 @@
+================================================================================
+INSTRUCCIÓN DE MARCA Y CUMPLIMIENTO LEGAL (MANDATORIA EN EL CÓDIGO Y EN LA UI)
+================================================================================
+
+A LA ATENCIÓN DEL EQUIPO DE DESARROLLO / AGENCIA:
+
+Es un requisito de diseño Y legal que la aplicación "Trámite.IA.MIAMI.FL" 
+incluya el siguiente descargo de responsabilidad en tres lugares clave:
+  1. En la pantalla de registro / Onboarding de la app (Checkbox obligatorio).
+  2. En el pie de página de la plataforma web y móvil.
+  3. En el pie de página de TODOS los archivos PDF generados por el sistema.
+
+TEXTO EXACTO A INSERTAR:
+
+"DESCARGO LEGAL / DISCLAIMER OBLIGATORIO:
+Trámite.IA.MIAMI.FL es una plataforma de software de autoayuda y asistencia 
+mecanográfica administrativa en la preparación de documentos. Trámite.IA.MIAMI.FL 
+NO es una firma de abogados ni de contadores públicos certificados (CPA), no presta 
+asesoría legal, fiscal ni financiera personalizada, ni representa a usuarios ante 
+organismos gubernamentales o buros de crédito. La plataforma funciona como una 
+herramienta tecnológica bajo las leyes FCRA, CROA y las normas de preparadores 
+documentales de Florida. El usuario es el único responsable de la verificación, 
+firma y presentación final de todos los documentos generados."
+================================================================================
