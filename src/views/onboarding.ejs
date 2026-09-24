@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trámite.IA.MIAMI.FL · Onboarding</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card hero">
+        <span class="eyebrow">Registro / Onboarding</span>
+        <h1>Trámite.IA.MIAMI.FL</h1>
+        <p>Plataforma de autoayuda para expedientes tributarios, reparación de crédito y gestión administrativa.</p>
+      </section>
+
+      <section class="card">
+        <h2>Descargo obligatorio</h2>
+        <% if (typeof error !== 'undefined') { %>
+          <p class="error"><%= error %></p>
+        <% } %>
+        <blockquote><%= legalDisclaimer %></blockquote>
+        <form action="/onboarding" method="post" class="stack">
+          <label class="checkbox-row">
+            <input type="checkbox" name="acceptDisclaimer" />
+            <span>He leído y acepto el descargo legal obligatorio.</span>
+          </label>
+          <button type="submit">Continuar al panel</button>
+        </form>
+      </section>
+    </main>
+    <%- include('partials/footer', { legalDisclaimer }) %>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trámite.IA.MIAMI.FL · Panel</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card hero">
+        <span class="eyebrow">Módulos y agentes autónomos</span>
+        <h1>Panel operativo</h1>
+        <p>Los módulos listados están incluidos en el código y listos para generar expedientes y paquetes PDF.</p>
+      </section>
+
+      <section class="grid">
+        <% modules.forEach((module) => { %>
+          <article class="card module-card">
+            <h2><%= module.title %></h2>
+            <p><%= module.summary %></p>
+            <ul>
+              <% module.tasks.forEach((task) => { %>
+                <li><%= task %></li>
+              <% }) %>
+            </ul>
+            <form action="/documents/dispatch.pdf" method="post" class="stack compact-form">
+              <input type="hidden" name="moduleId" value="<%= module.id %>" />
+              <label>
+                Cliente
+                <input type="text" name="clientName" placeholder="Nombre del cliente" required />
+              </label>
+              <button type="submit">Generar PDF del expediente</button>
+            </form>
+          </article>
+        <% }) %>
+      </section>
+    </main>
+    <%- include('partials/footer', { legalDisclaimer }) %>
+  </body>
+</html>
